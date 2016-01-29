@@ -32,6 +32,16 @@ public class MainOperatorClient implements Serializable {
         return bond;
     }
 
+    public void transferBone(Bond bond) {
+        try {
+            MainOperatorPrx mainOperatorPrx = this.getOwnPrx();
+
+            mainOperatorPrx.transferBond(bond);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     // 获取服务端提供的代理
     private MainOperatorPrx mainOperatorPrx = null;
 

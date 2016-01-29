@@ -1,5 +1,6 @@
 package com.example.transfer.client;
 
+import com.example.transfer.dao.BondLCData;
 import com.example.transfer.dto.Bond;
 
 import java.io.Serializable;
@@ -28,6 +29,9 @@ public class StartAllClient implements Serializable {
         }
 
         System.out.println(info.toString());
+        System.out.println("==========start transfer Bond ==========");
+        moc.transferBone(bond);
+
         System.exit(0);
     }
 }

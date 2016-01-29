@@ -2,6 +2,7 @@ package com.example.transfer.client;
 
 import Ice.ObjectAdapter;
 import com.example.transfer.servant.MainOperatorI;
+import com.example.transfer.servant.ObjectFactory4Bond;
 
 import java.io.Serializable;
 
@@ -20,6 +21,9 @@ public class MainOperatorServer implements Serializable {
             // 1, 初始化环境
             // 加载属性文件
             ic = Ice.Util.initialize();
+
+            Ice.ObjectFactory factory = new ObjectFactory4Bond();
+            ic.addObjectFactory(factory, com.example.transfer.servant.BondI.ice_staticId());
 
             // 2, 初始化Adapter
             String name = "MainOperatorServer";
