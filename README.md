@@ -204,6 +204,57 @@ To be continue. Next will add file about client.
 
 ***
 
+Now add a file about client
+
+### sixth add client
+
+```
+// 代理为空时，自动获取代理。
+        if (this.mainOperatorPrx == null) {
+            // 环境为空时，初始化环境
+            if (this.ic == null) {
+                // 1, 初始化环境
+                ic = Ice.Util.initialize();
+            }
+            // 2, 创建代理基类对象
+            String str = "MainOperatorUID:default -h 127.0.0.1 -p 10000";
+
+            ObjectPrx objPrx = this.ic.stringToProxy(str);
+            // 3, 获取代理
+            this.mainOperatorPrx = MainOperatorPrxHelper.checkedCast(objPrx);
+
+            // 4, 测试是否可用，不可用时抛出异常。
+            if (this.mainOperatorPrx == null) {
+                throw new Exception(str + ", request proxy faild.");
+            }
+        }
+```
+```
+ MainOperatorClient moc = new MainOperatorClient();
+        Bond bond = moc.getBond("something");
+```
+ 
+ 
+### The end add Factory
+
+```
+public class ObjectFactory4Bond implements ObjectFactory {
+    public Object create(String s) {
+        System.out.println("!!>type=" + s);
+        if (s.equals(com.example.transfer.servant.BondI.ice_staticId())) {
+            return new BondI();
+        }
+        return null;
+    }
+
+    public void destroy() {
+
+    }
+}
+```
+
+END.
+
 ***
 
 PS.it refer from [Zeroc Ice返回值类型对象的实现](http://www.2cto.com/kf/201107/97871.html "Page Link")
